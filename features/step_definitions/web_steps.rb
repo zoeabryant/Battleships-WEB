@@ -32,7 +32,6 @@ end
 
 When /^(?:|I )follow "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
   with_scope(selector) do
-    save_and_open_page
     click_link(link)
   end
 end
