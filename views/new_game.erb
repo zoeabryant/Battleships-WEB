@@ -1,5 +1,22 @@
 <html>
+	<head>
+			<title>WEBDAWGS Battleships!</title>
+	</head>
 
-What's your name?
+	<body>
+
+		<h1>Players, please enter your names.</h1>
+
+		<form name="input" action="/registration_success" method="post">
+
+		    Player 1:
+		      <input type="text" name="player1name" placeholder="Enter name" required pattern="[a-zA-Z]+"> <br>
+		    Player 2:
+		      <input type="text" name="player2name" placeholder="Enter name" required pattern="[a-zA-Z]+"> <br>
+
+		  	<input type="submit" value="Submit">
+		</form>
+
+	</body>
 
 </html>
