@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require './files'
 
 class BattleShips < Sinatra::Base
 
@@ -13,10 +14,16 @@ class BattleShips < Sinatra::Base
   end
 
 	post '/registration_success' do
-	 	@player1name = params[:player1name]
-		@player2name = params[:player2name]
+		@player1 = Player.new(:name => params[:player1], :board => Board.new)
+		@player2 = Player.new(:name => params[:player2], :board => Board.new)
 		erb :registration_success
 	end
+
+	get '/place_ships' do
+		erb :place_ships
+	end
+
+
 
 	# start the server if ruby file executed directly
 	run! if app_file == $0
