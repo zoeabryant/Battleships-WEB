@@ -8,8 +8,8 @@ class BattleShips < Sinatra::Base
 		erb :index
 	end
 
-  get '/new_game' do
-    erb :new_game
+  get '/registration' do
+    erb :registration
   end
 
 	post '/registration_success' do
