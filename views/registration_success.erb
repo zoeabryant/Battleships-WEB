@@ -6,9 +6,9 @@
 	<body>
 		<h1>Registration Success!</h1>
 
-		<p>Welcome to Webdawgs' Battleships, <%= @player1name %> and <%= @player2name %>! </p>
+		<p>Welcome to Webdawgs' Battleships, <%= @player1.name %> and <%= @player2.name %>! </p>
 
 		<p><%= @player1.name %>, please click "I'm ready" when you are ready to place your ships. (<%= @player2.name %>, look away!) </p>
-		<a href="/place_ships">I'm ready</a>
+		<button href="/place_ships">I'm ready</button>
 	</body>
 </html>
