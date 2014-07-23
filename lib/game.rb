@@ -5,9 +5,22 @@ class Game
 	def initialize(player_one: :player_one, player_two: :player_two)
 		@player_one = player_one
 		@player_two = player_two
+		@players = []
 	end
 
-	attr_reader :player_one, :player_two
+	attr_reader :player_one, :player_two, :players
+
+	def add player
+		@players << player
+	end
+
+	def restart
+		@players = []
+	end
+
+	def start?
+		@players.count >= 2
+	end
 
 	def deploy_ships_for(player)
 		until player.ships_to_deploy.empty?

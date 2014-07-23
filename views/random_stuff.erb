@@ -1,0 +1,14 @@
+	
+
+	@player_1 = Player.new(:name => params[:name_1], :board => Board.new(content:Water.new))
+  	@player_2 = Player.new(:name => params[:name_2], :board => Board.new(content:Water.new)
+
+
+
+  	<%= @player_1.name %>
+  	
+	<% @player_1.ships_to_deploy.each do |ship| %>
+		<h4><%= ship.class %></h4>
+	<% end %>
+
+	<%= @player_2.ships_to_deploy[0] %>
