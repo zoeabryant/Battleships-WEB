@@ -20,7 +20,7 @@ class Ship
 
 end
 
-class PatrolBoat < Ship
+class Patrol < Ship
 	def initialize
 		super 2
 	end
