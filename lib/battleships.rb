@@ -4,22 +4,23 @@ require './files'
 class BattleShips < Sinatra::Base
 
 	set :views, Proc.new { File.join(root, "..", "views") }
+	enable :sessions
+	GAME = Game.new
 
 	get '/' do
+		puts GAME.players.inspect
 		erb :index
 	end
 
-  get '/registration' do
-    erb :registration
-  end
-
-	post '/registration_success' do
-		@player1 = Player.new(:name => params[:player1], :board => Board.new)
-		@player2 = Player.new(:name => params[:player2], :board => Board.new)
-		erb :registration_success
+	get '/registration' do
+		erb :registration
 	end
 
-	get '/place_ships' do
+	post '/place_ships' do
+		session[:player] = Player.new(:name => params[:name], :board => Board.new)
+		GAME.add session[:player]
+		# puts GAME.start?
+		# "Waiting for another player..." unless GAME.start?
 		erb :place_ships
 	end
 

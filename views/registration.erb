@@ -1,22 +1,9 @@
-<html>
-	<head>
-			<title>Webdawgs' Battleships!</title>
-	</head>
+<h1>Player, please enter your name.</h1>
 
-	<body>
+<form name="input" action="/place_ships" method="post">
 
-		<h1>Players, please enter your names.</h1>
+	<input type="text" name="name" placeholder="Enter name" required pattern="[a-zA-Z]+"> <br>
 
-		<form name="input" action="/registration_success" method="post">
+	<input type="submit" value="Play!">
 
-		    Player 1:
-		      <input type="text" name="player1" placeholder="Enter name" required pattern="[a-zA-Z]+"> <br>
-		    Player 2:
-		      <input type="text" name="player2" placeholder="Enter name" required pattern="[a-zA-Z]+"> <br>
-
-		  	<input type="submit" value="Play!">
-		</form>
-
-	</body>
-
-</html>
+</form>

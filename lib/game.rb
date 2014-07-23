@@ -2,11 +2,17 @@ require './files'
 
 class Game
 
-	def initialize(player1: :player1, player2: :player2)
-		@player1 = player1
-		@player2 = player2
+	attr_reader :players
+
+	def initialize
+		@players = []
 	end
 
-	attr_reader :player1, :player2
-		
+	def add player
+		@players << player
+	end
+
+	def start?
+		@players.count == 2
+	end
 end
