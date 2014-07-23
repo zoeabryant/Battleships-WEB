@@ -23,6 +23,11 @@ class BattleShips < Sinatra::Base
 		erb :place_ships
 	end
 
+	get '/grid' do
+		@board = Board.new
+		erb :grid
+	end
+
 
 
 	# start the server if ruby file executed directly

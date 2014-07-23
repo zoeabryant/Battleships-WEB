@@ -23,11 +23,31 @@ class Board
 		rows
 	end
 
+	def print_grid_symbol(contents)
+		case contents
+
+		when Water
+			return '~'
+
+		when Ship
+			return '♛'
+
+		when ShotAtCell
+			return 'x'
+
+		when :miss
+			return 'o'
+
+		else
+			return ' '
+		end
+	end
+
 	private
-	
+
 	def create_new_grid_with(content)
 		grid = {}
-		('A'..'J').to_a.each{ |column| (1..10).to_a.each{ |row| grid["#{column}#{row}"] = Cell.new(content) }}
+		(1..10).to_a.each{ |row| ('A'..'J').to_a.each{ |column| grid["#{column}#{row}"] = Cell.new(content) }}
 		grid
 	end
 

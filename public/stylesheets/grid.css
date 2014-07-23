@@ -1,0 +1,8 @@
+table.battleship_grid td {
+	border: 1px solid black;
+	width: 30px;
+	height: 30px;
+	padding:0;
+	text-align: center;
+
+}
