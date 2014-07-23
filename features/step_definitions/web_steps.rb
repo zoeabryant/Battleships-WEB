@@ -98,6 +98,26 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"(?: within "([^\"]*)")?$/ 
   end
 end
 
+
+
+# When /^I confirm popup$/ do
+#   # page.evaluate_script('window.confirm = function() { return true; }')
+#   # page.click('OK')
+#   page.driver.browser.switch_to.alert.accept
+#   # popup.confirm
+# end
+
+# When /^I dismiss popup$/ do
+#   page.driver.browser.switch_to.alert.dismiss
+#   #page.evaluate_script('window.confirm = function() { return true; }')
+#   #page.click('Cancel')
+#   #popup.dismiss
+# end
+
+
+
+
+
 Then /^(?:|I )should see JSON:$/ do |expected_json|
   require 'json'
   expected = JSON.pretty_generate(JSON.parse(expected_json))
@@ -125,6 +145,17 @@ Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, selec
     end
   end
 end
+
+# Then /^(?:|I )should see "([^\"]*)"(?: within \/([^\/]*)\/)?$/ do |regexp, selector|
+#   regexp = Regexp.new(regexp)
+#   with_scope(selector) do
+#     if page.respond_to? :should
+#       page.should have_xpath('//*', :text => regexp)
+#     else
+#       assert page.has_xpath?('//*', :text => regexp)
+#     end
+#   end
+# end
 
 Then /^(?:|I )should not see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
   with_scope(selector) do

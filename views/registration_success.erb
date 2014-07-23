@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Success!</title>
+</head>
+	<body>
+
+	<h2>Welcome to Battleships <%= @player_1.name %> and <%= @player_2.name %>.</h2> 
+
+	<h4>Place your ships!</h4>
+
+	<h3>Ships to deploy</h3>
+	
+	<% @player_1.ships_to_deploy.each do |ship| %>
+		<h4><%= ship.class %></h4>
+	<% end %>
+
+	<%= @player_2.ships_to_deploy %>
+
+
+	</body>
+</html>

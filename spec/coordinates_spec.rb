@@ -51,17 +51,17 @@ describe Coordinates do
 	context 'checking validity' do
 		it 'knows that ["A1", "A2", "A4"] are not valid coordinates' do
 			coordinates = Coordinates.new(["A1", "A2", "A4"])
-			expect(coordinates).not_to be_valid_coordinates
+			expect(coordinates).not_to be_valid
 		end
 
 		it 'knows that ["A1", "A2", "A3"] are valid coordinates' do
 			coordinates = Coordinates.new(["A1", "A2", "A3"])
-			expect(coordinates).to be_valid_coordinates
+			expect(coordinates).to be_valid
 		end
 
 		it 'knows that ["C1", "D1", "E1"] are valid coordinates' do
 			coordinates = Coordinates.new(["C1", "D1", "E1"])
-			expect(coordinates).to be_valid_coordinates
+			expect(coordinates).to be_valid
 		end
 	end
 

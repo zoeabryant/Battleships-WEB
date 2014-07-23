@@ -13,7 +13,7 @@ describe Player do
 
 	it 'is initialized with all the ships he needs to deploy' do
 		player = Player.new
-		expect(player.ships.count).to eq 5
+		expect(player.ships_to_deploy.count).to eq 5
 	end
 
 	it 'can shoot at opponets board' do

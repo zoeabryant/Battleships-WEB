@@ -27,6 +27,11 @@ describe Cell do
 	end
 
 	context 'to string' do
+
+		before(:each) do
+			allow(Ship).to receive(:superclass).and_return(Ship)
+		end
+
 		it 'returns " " if water here and not shot at' do
 			expect(cell_with_water.status).to eq ' '
 		end
@@ -38,7 +43,7 @@ describe Cell do
 		it 'returns "O" if water here and shot at' do
 			allow(water).to receive(:hit!)
 			cell_with_water.shoot!
-			expect(cell_with_ship.status).to eq 'S'
+			expect(cell_with_water.status).to eq 'O'
 		end
 
 		it 'returns "X" if damaged ship here' do

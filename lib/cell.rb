@@ -28,7 +28,7 @@ class Cell
 	end
 
 	def part_of_ship_here?
-		content.class == Ship
+		content.class.superclass == Ship
 	end
 
 	def part_of_damaged_ship_here?

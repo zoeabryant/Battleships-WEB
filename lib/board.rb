@@ -2,7 +2,7 @@ require './lib/cell'
 
 class Board
 
-	def initialize(content: Water.new)
+	def initialize(content: :water)
 		@grid = create_new_grid_with(content)
 	end
 
@@ -17,18 +17,21 @@ class Board
 	end
 
 	def render_display
-		rows = []
-		grid.values.map{|cell| cell.status}.each_slice(10){|row| rows << row}
-		rows.each{|row| puts row.inspect}
-		rows
+		rows_of_cells.each_slice(10).map { |el| el }
+	end
+
+	def nice_display
+		render_display.each{|row| p row}
 	end
 
 	private
+
+	def rows_of_cells
+		grid.values.map{|cell| cell.status}
+	end
 	
 	def create_new_grid_with(content)
-		grid = {}
-		('A'..'J').to_a.each{ |column| (1..10).to_a.each{ |row| grid["#{column}#{row}"] = Cell.new(content) }}
-		grid
+		("A".."J").map { |letter| (1..10).map { |number| {"#{letter}#{number}" => Cell.new(content) } } }.flatten.inject(&:merge)
 	end
 
 end

@@ -1,7 +1,7 @@
 class Water
 
 	def hit!
-		'Splash'
+		puts 'Splash'
 	end
 
 end	

@@ -15,7 +15,7 @@ describe Board do
 		it 'has some content in each cell' do
 			board = Board.new
 			board.grid.values.each do |cell|
-				expect(cell.content).to be_an_instance_of Water
+				expect(cell.content).to eq :water
 			end
 		end
 	end

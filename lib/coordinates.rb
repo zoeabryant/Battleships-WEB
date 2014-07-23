@@ -31,7 +31,7 @@ class Coordinates
 		all_columns_included? && all_rows_included?
 	end
 
-	def valid_coordinates?
+	def valid?
 		inside_grid? && rows_sequential? && columns_sequential?
 	end
 
@@ -46,9 +46,12 @@ class Coordinates
 	end
 
 	def are_sequential?(numbers)
+		numbers.sort == create_range_from_array_of(numbers).to_a
+	end
+
+	def create_range_from_array_of(numbers)
 		numbers = numbers.sort
-		range   = (numbers.first..numbers.last)
-		numbers == range.to_a
+		(numbers.first..numbers.last)
 	end
 
 	def convert_to_numbers(letters)

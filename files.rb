@@ -1,5 +1,6 @@
 require './lib/cell'
 require './lib/water'
+require './lib/game'
 require './lib/ship'
 require './lib/coordinates'
 require './lib/board'
