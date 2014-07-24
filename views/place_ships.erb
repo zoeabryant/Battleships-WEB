@@ -1,7 +1,7 @@
-<h1>Place Ships!</h1>
+<h2>Place your <%= params[:shipname] %>!</h2>
 
-<%= erb :grid %>
+<%= erb :place_ships_grid %>
 
 <% session[:player].ships.each do |ship| %>
-<ship class="<%= ship.class %> ship"><%= ship.class %> <%= ship.remaining_hits %></ship>
+<ship class="<%= ship.class %> ship"><% ship.class %> <% ship.remaining_hits %></ship>
 <% end %>

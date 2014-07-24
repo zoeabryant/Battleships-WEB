@@ -33,8 +33,35 @@ class BattleShips < Sinatra::Base
 	end
 
 	get '/place_ships' do
+		@ships = session[:player].ships
+		@current_ship = @ships.first
+		@current_ship_name = @current_ship.class
+		redirect "/place_ships/#{@current_ship_name}"
+
+		erb :place_ships
+	end
+
+	get '/place_ships/:shipname' do
 		@board = session[:player].board
 		erb :place_ships
+	end
+
+	post '/place_ships/:shipname' do
+		# want to place correct ship with grabbed coordinates in params
+		coordinates = params.select{|k,v|v == "on"}.keys
+		@current_ship = session[:player].ships.shift
+		@board = session[:player].board
+		session[:player].board.place(@current_ship, Coordinates.new(coordinates))
+		puts session[:player].board.grid
+		if @current_ship.class == nil
+			erb :game
+		else
+			erb :place_ships
+		end
+	end
+
+	post '/game' do
+		puts params
 	end
 
 	# start the server if ruby file executed directly

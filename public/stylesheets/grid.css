@@ -1,3 +1,9 @@
+h1 {
+	font-size: 60px;
+	padding: 0px;
+	margin-bottom: 0px;
+}
+
 body {
 	font-family: sans-serif;
 	text-align: center;
@@ -22,8 +28,14 @@ table.battleship_grid td:hover {
 	background: #F70D1A;
 }
 
+footer {
+	font-size: 12px;
+	padding: 100px 0 0 0;
+}
 
-ship {
+
+
+/*ship {
 	display: inline-block;
 	border: 1px solid black;
 	height: 30px;
@@ -31,16 +43,16 @@ ship {
 
 .Patrol {
 	width: 62px;
-} /* 2 */
+}
 .Submarine {
 	width: 94px;
-} /* 3 */
+}
 .Destroyer {
 	width: 126px;
-} /* 4 */
+} 
 .Battleship {
 	width: 158px;
-} /* 5 */
+} 
 .Carrier {
 	width: 190px;
-} /* 6 */
+} */

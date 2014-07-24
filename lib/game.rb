@@ -13,6 +13,6 @@ class Game
 	end
 
 	def start?
-		@players.count == 2
+		@players.count == 1
 	end
 end
