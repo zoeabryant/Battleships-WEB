@@ -16,7 +16,11 @@ module NavigationHelpers
     when /the new game page/
       'new_game'
 
+<<<<<<< HEAD
     when /the registration complete page/
+=======
+    when /registration success/
+>>>>>>> 3103d7920bd07371aa7d9ba587a50f5e0abe2eb3
       'registration_success'
 
     # Add more mappings here.

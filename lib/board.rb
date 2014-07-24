@@ -24,14 +24,41 @@ class Board
 		render_display.each{|row| p row}
 	end
 
+	def print_grid_symbol(contents)
+		case contents
+
+		when Water
+			return '~'
+
+		when Ship
+			return '♛'
+
+		when ShotAtCell
+			return 'x'
+
+		when :miss
+			return 'o'
+
+		else
+			return ' '
+		end
+	end
+
 	private
 
+<<<<<<< HEAD
 	def rows_of_cells
 		grid.values.map{|cell| cell.status}
 	end
 	
 	def create_new_grid_with(content)
 		("A".."J").map { |letter| (1..10).map { |number| {"#{letter}#{number}" => Cell.new(content) } } }.flatten.inject(&:merge)
+=======
+	def create_new_grid_with(content)
+		grid = {}
+		(1..10).to_a.each{ |row| ('A'..'J').to_a.each{ |column| grid["#{column}#{row}"] = Cell.new(content) }}
+		grid
+>>>>>>> 3103d7920bd07371aa7d9ba587a50f5e0abe2eb3
 	end
 
 end

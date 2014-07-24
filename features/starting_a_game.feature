@@ -21,3 +21,4 @@ Feature: Starting the game
     And I fill in "name" with "" within "input"
     Then I should see an error
 
+

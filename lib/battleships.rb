@@ -10,7 +10,6 @@ class BattleShips < Sinatra::Base
 	set :public_folder, Proc.new { File.join(root, "..", "public")}
 
 	get '/' do
-		puts session[:me]
 		puts GAME.players.inspect
 		erb :index
 	end
@@ -39,11 +38,6 @@ class BattleShips < Sinatra::Base
 	  	end
 	    erb :registration_success
 	  end
-
-
-
-  # get /:task do
-  # 	@task = params[:task]
 
 
 	# start the server if ruby file executed directly

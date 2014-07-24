@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Webdawgs Battleships!</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/grid.css">
+</head>
+
+<body>
+	<table class="battleship_grid">
+	<!-- Letters row -->
+	<tr>
+		<th></th>
+	<% letters = ('A'..'J').to_a
+	   letters.each do |letter| %>
+		<th><%= letter %></th>
+	<% end %>
+
+	</tr>
+	<!-- /Letters row -->
+
+	<%
+		letters.length.times do |current_number|
+	%>
+	<!-- numbers/actual grid rows -->
+	<tr>
+		<th><%= current_number + 1 %></th>
+	<%
+			letters.each do |letter|
+				coordinate = letter + (current_number + 1).to_s
+				cell = @board.grid[coordinate]
+				display = @board.print_grid_symbol(cell.content)
+
+	%>
+		<td id="<%= coordinate %>"><%= display %></td>
+	<%
+			end
+	%>
+	</tr>
+	<!-- /numbers/actual grid rows -->
+	<%
+		end
+	%>
+	</table>
+</body>
+</html>
