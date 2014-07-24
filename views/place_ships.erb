@@ -6,5 +6,5 @@
 <%= erb :grid %>
 
 <% session[:player].ships.each do |ship| %>
-<ship class="<%= ship.class %> draggable"><%= ship.class %> <%= ship.remaining_hits %></ship>
+<ship class="<%= ship.class %> ship"><%= ship.class %> <%= ship.remaining_hits %></ship>
 <% end %>

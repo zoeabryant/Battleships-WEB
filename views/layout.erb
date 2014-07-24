@@ -3,17 +3,32 @@
 <head>
 	<title>Webdawgs' Battleships!</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/grid.css">
+
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script>
-	  $(function() {
-	    $( ".draggable" ).draggable({
-	    		// grid: [ 2, 32 ],
-	    		containment: ".battleship_grid"
-	    	});
-	  });
+		$(function() {
+			$( ".ship" ).draggable({
+				containment: ".battleship_grid",
+				grid: [ 20, 30 ]
+			});
+
+			$( ".battleship_grid td" ).droppable({
+				// over: function( event, ui ) {
+
+				// 	console.log(this.id)
+				// },
+				drop: function(event, ui) {
+					$( this ).html('drop');
+					console.log(ui.draggable.attr('class').split(' ')[0])
+					console.log('placed here!')
+					console.log(this.id)
+				}
+			});
+
+		});
 	  </script>
 </head>
 <body>
