@@ -1,8 +1,46 @@
+body {
+	font-family: sans-serif;
+	text-align: center;
+}
+table.battleship_grid {
+	margin: 0px auto;
+}
+
+table.battleship_grid th,
 table.battleship_grid td {
-	border: 1px solid black;
 	width: 30px;
 	height: 30px;
-	padding:0;
-	text-align: center;
 
+	padding: 0px;
+	text-align: center;
 }
+table.battleship_grid td {
+	background: #43C6DB;
+	cursor: pointer;
+}
+table.battleship_grid td:hover {
+	background: #F70D1A;
+}
+
+
+ship {
+	display: inline-block;
+	border: 1px solid black;
+	height: 30px;
+}
+
+.Patrol {
+	width: 62px;
+} /* 2 */
+.Submarine {
+	width: 94px;
+} /* 3 */
+.Destroyer {
+	width: 126px;
+} /* 4 */
+.Battleship {
+	width: 158px;
+} /* 5 */
+.Carrier {
+	width: 190px;
+} /* 6 */

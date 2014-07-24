@@ -1,3 +1,7 @@
 <h1>Place Ships!</h1>
 
-<p> Welcome to WEBDAWGS Battleships!</p>
+<%= erb :grid %>
+
+<% session[:player].ships.each do |ship| %>
+<ship class="<%= ship.class %> ship"><%= ship.class %> <%= ship.remaining_hits %></ship>
+<% end %>

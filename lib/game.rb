@@ -9,7 +9,7 @@ class Game
 	end
 
 	def add player
-		@players << player
+		@players << player unless start?
 	end
 
 	def start?

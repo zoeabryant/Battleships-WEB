@@ -4,6 +4,7 @@ require './files'
 class BattleShips < Sinatra::Base
 
 	set :views, Proc.new { File.join(root, "..", "views") }
+	set :public_dir, Proc.new { File.join(root, "..", "public") }
 	enable :sessions
 	GAME = Game.new
 
@@ -16,20 +17,25 @@ class BattleShips < Sinatra::Base
 		erb :registration
 	end
 
-	post '/place_ships' do
+	post '/waiting_room' do
 		session[:player] = Player.new(:name => params[:name], :board => Board.new)
 		GAME.add session[:player]
-		# puts GAME.start?
-		# "Waiting for another player..." unless GAME.start?
-		erb :place_ships
+
+		redirect '/place_ships' if GAME.start?
+
+		erb :waiting_room
 	end
 
-	get '/grid' do
-		@board = Board.new
+	get '/waiting_room' do
+		redirect '/place_ships' if GAME.start?
+
+		erb :waiting_room
+	end
+
+	get '/place_ships' do
+		@board = session[:player].board
 		erb :grid
 	end
-
-
 
 	# start the server if ruby file executed directly
 	run! if app_file == $0
