@@ -34,7 +34,7 @@ class BattleShips < Sinatra::Base
 
 	get '/place_ships' do
 		@board = session[:player].board
-		erb :grid
+		erb :place_ships
 	end
 
 	# start the server if ruby file executed directly
