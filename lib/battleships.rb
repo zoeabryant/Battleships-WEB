@@ -21,6 +21,9 @@ class BattleShips < Sinatra::Base
 		session[:player] = Player.new(:name => params[:name], :board => Board.new)
 		GAME.add session[:player]
 
+		puts 'post waiting room'
+		puts GAME.start?
+
 		redirect '/place_ships' if GAME.start?
 
 		erb :waiting_room
@@ -28,6 +31,9 @@ class BattleShips < Sinatra::Base
 
 	get '/waiting_room' do
 		redirect '/place_ships' if GAME.start?
+
+		puts 'gets waiting room'
+		puts GAME.start?
 
 		erb :waiting_room
 	end
@@ -52,16 +58,23 @@ class BattleShips < Sinatra::Base
 		@current_ship = session[:player].ships.shift
 		@board = session[:player].board
 		session[:player].board.place(@current_ship, Coordinates.new(coordinates))
-		puts session[:player].board.grid
-		if @current_ship.class == nil
-			erb :game
+		if params[:shipname] == 'NilClass'
+			redirect '/game'
 		else
 			erb :place_ships
 		end
 	end
 
 	post '/game' do
-		puts params
+		@board = session[:player].board
+		@opponentsboard = GAME.players.last.board
+		erb :game
+	end
+
+	get '/game' do
+		@board = session[:player].board
+		@opponentsboard = GAME.players.last.board
+		erb :game
 	end
 
 	# start the server if ruby file executed directly

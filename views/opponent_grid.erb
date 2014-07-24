@@ -1,0 +1,41 @@
+<form name="ships_grid" action="/game" method="post">
+
+<table class="battleship_grid">
+	<!-- Letters row -->
+	<tr>
+		<th></th>
+	<% letters = ('A'..'J').to_a
+	   letters.each do |letter| %>
+		<th><%= letter %></th>
+	<% end %>
+
+	</tr>
+	<!-- /Letters row -->
+
+	<%
+		letters.length.times do |current_number|
+	%>
+	<!-- numbers/actual grid rows -->
+	<tr>
+		<th><%= current_number + 1 %></th>
+	<%
+			letters.each do |letter|
+				coordinate = letter + (current_number + 1).to_s
+				cell = @opponentsboard.grid[coordinate]
+				display = @opponentsboard.print_grid_symbol(cell.content)
+
+	%>
+		<td id="<%= coordinate %>"><%= display %></td>
+	<%
+			end
+	%>
+	</tr>
+	<!-- /numbers/actual grid rows -->
+	<%
+		end
+	%>
+</table>
+
+<input type="submit" value="Place">
+
+</form>
