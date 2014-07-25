@@ -31,4 +31,5 @@ describe Game do
 			expect(game.opponent_player(name).name).to eq player2.name
 		end
 	end
+
 end

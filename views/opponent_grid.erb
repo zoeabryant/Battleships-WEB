@@ -1,4 +1,4 @@
-<form name="ships_grid" action="/game" method="post">
+<form name="ships_grid" action="/shot" method="post">
 
 <table class="battleship_grid">
 	<!-- Letters row -->
@@ -22,11 +22,16 @@
 			letters.each do |letter|
 				coordinate = letter + (current_number + 1).to_s
 				cell = @opponentsboard.grid[coordinate]
-				display = @opponentsboard.print_grid_symbol(cell.content)
-
+				display = @opponentsboard.print_away_grid_symbol(cell.content)
 	%>
-		<td id="<%= coordinate %>"><%= display %></td>
-		<!-- <input type="radio" name="sex" value="male"> -->
+		<td id="<%= coordinate %>">
+			<%= display %>
+			<% if cell.shot_at? %>
+				<%= display %>
+			<% else %>
+				<input type="radio" name="shoot_at" value="<%= coordinate %>">
+			<% end %>
+		</td>
 	<%
 			end
 	%>

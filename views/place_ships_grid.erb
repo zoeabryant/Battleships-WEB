@@ -77,10 +77,10 @@ $(document).ready(function() {
 				used = cell.content.class.superclass == Ship
 	%>
 		<td>
-			<% if !used %>
-			<input type="checkbox" name="<%= coordinate %>">
-			<% else %>
+			<% if used %>
 			♛
+			<% else %>
+			<input type="checkbox" name="<%= coordinate %>">
 			<% end %>
 		</td>
 	<%

@@ -23,7 +23,7 @@ class Board
 		rows
 	end
 
-	def print_grid_symbol(contents)
+	def print_home_grid_symbol(contents)
 		case contents
 
 		when Water
@@ -35,6 +35,26 @@ class Board
 		else
 			return ' '
 		end
+	end
+
+	def print_away_grid_symbol(contents)
+		case contents
+
+		when Water
+			return 'o'
+
+		when Ship
+			return 'x'
+
+		else
+			return ' '
+		end
+	end
+
+	def has_ships?
+		grid.reject{ |key, value| value.content.class == Water }.length != 0
+
+		# grid.values.any?(part_of_ship_here?) # ugh
 	end
 
 	private

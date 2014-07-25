@@ -6,6 +6,7 @@ class BattleShips < Sinatra::Base
 	set :views, Proc.new { File.join(root, "..", "views") }
 	set :public_dir, Proc.new { File.join(root, "..", "public") }
 	set :session_secret, 'super secret'
+
 	enable :sessions
 	GAME = Game.new
 
@@ -19,21 +20,9 @@ class BattleShips < Sinatra::Base
 
 	post '/waiting_room' do
 		player = Player.new(:name => params[:name], :board => Board.new)
-		session[:player] = player.name
 		GAME.add player
 
-		puts GAME.players
-
-		puts 'post waiting_room'
-		puts 'session:'
-		puts GAME.current_player(session[:player])
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
+		session[:player] = player.name
 
 		redirect '/place_ships' if GAME.start?
 
@@ -42,41 +31,17 @@ class BattleShips < Sinatra::Base
 
 	get '/waiting_room' do
 		redirect '/place_ships' if GAME.start?
-
-		puts 'get waiting_room'
-		puts 'session:'
-		puts GAME.current_player(session[:player])
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
-
 		erb :waiting_room
 	end
 
 	get '/place_ships' do
+		# if taken to instead of waiting room
 		@player = GAME.current_player(session[:player])
-		@ships = GAME.current_player(session[:player]).ships
+		@ships = @player.ships
 		@current_ship = @ships.first
 		@current_ship_name = @current_ship.class
+
 		redirect "/place_ships/#{@current_ship_name}"
-
-
-		puts 'get place_ships'
-		puts current_ship
-		puts 'session:'
-		puts GAME.current_player(session[:player])
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
-
 
 		erb :place_ships
 	end
@@ -85,46 +50,18 @@ class BattleShips < Sinatra::Base
 		@player = GAME.current_player(session[:player])
 		@board = @player.board
 
-		puts 'get place_ships/:shipname'
-		puts 'session:'
-		puts GAME.current_player(session[:player])
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
-
 		erb :place_ships
 	end
 
 	post '/place_ships/:shipname' do
-		# want to place correct ship with grabbed coordinates in params
 		@player = GAME.current_player(session[:player])
-		coordinates = params.select{|k,v|v == "on"}.keys
-		@current_ship = @player.ships.shift
 		@board = @player.board
 
+		coordinates = params.select{|k,v|v == "on"}.keys
 
-		puts 'post place_ships/:shipname'
-		puts @current_ship
-		puts 'session:'
-		puts @player
-		puts 'post place_ships/:shipname'
-		puts @current_ship
-		puts 'session:'
-		puts @player
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
+		@current_ship = @player.ships.shift
 
-		@player.board.place(@current_ship, Coordinates.new(coordinates))
-
+		@board.place(@current_ship, Coordinates.new(coordinates))
 
 		if params[:shipname] == 'NilClass'
 			redirect '/game'
@@ -135,19 +72,6 @@ class BattleShips < Sinatra::Base
 
 	post '/game' do
 		@player = GAME.current_player(session[:player])
-
-		puts 'post game'
-		puts 'session:'
-		puts @player
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
-
-
 		@board = @player.board
 		@opponentsboard = GAME.opponent_player(session[:player]).board
 
@@ -156,22 +80,19 @@ class BattleShips < Sinatra::Base
 
 	get '/game' do
 		@player = GAME.current_player(session[:player])
-
-		puts 'get game'
-		puts 'session:'
-		puts @player
-		puts ''
-		puts ''
-		puts 'first player in GAME'
-		puts GAME.players.first
-		puts ''
-		puts 'last player in GAME'
-		puts GAME.players.last
-
-
-
 		@board = @player.board
 		@opponentsboard = GAME.opponent_player(session[:player]).board
+
+		erb :game
+	end
+
+	post '/shot' do
+		@player = GAME.current_player(session[:player])
+		@board = @player.board
+		@opponentsboard = GAME.opponent_player(session[:player]).board
+
+		@player.shoot_at(@opponentsboard, params[:shoot_at])
+
 		erb :game
 	end
 

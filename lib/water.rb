@@ -4,4 +4,4 @@ class Water
 		'Splash'
 	end
 
-end	
+end

@@ -20,10 +20,17 @@
 			letters.each do |letter|
 				coordinate = letter + (current_number + 1).to_s
 				cell = @board.grid[coordinate]
-				display = @board.print_grid_symbol(cell.content)
+				display = @board.print_home_grid_symbol(cell.content)
+				play_display = @opponentsboard.print_away_grid_symbol(cell.content)
 
 	%>
-		<td id="<%= coordinate %>"><%= display %></td>
+		<td id="<%= coordinate %>">
+			<% if cell.shot_at? %>
+				<%= play_display %>
+			<% else %>
+				<%= display %>
+			<% end %>
+		</td>
 	<%
 			end
 	%>
