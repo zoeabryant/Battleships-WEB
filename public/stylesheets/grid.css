@@ -4,6 +4,32 @@ h1 {
 	margin-bottom: 0px;
 }
 
+input[name=name] {
+	font-size: 40px;
+	text-align: center;
+	border: 0px none;
+	border-bottom: 2px dashed black;
+	padding-bottom: 10px;
+}
+
+input[type=submit]{
+	margin: 10px 0px;
+	padding: 10px 20px;
+	min-height: 40px;
+	min-width: 150px;
+
+	font-size: 20px;
+
+	border: none;
+	background: #43C6DB;
+	color: black;
+
+	cursor: pointer;
+}
+input[type=submit]:hover {
+	background: #6CC417;
+}
+
 body {
 	font-family: sans-serif;
 	text-align: center;
@@ -24,8 +50,22 @@ table.battleship_grid td {
 	background: #43C6DB;
 	cursor: pointer;
 }
+table.battleship_grid td input {
+	cursor: pointer;
+}
+
+table.opponent_grid td {
+	cursor: auto;
+}
+
 table.battleship_grid td:hover {
 	background: #F70D1A;
+}
+
+.error {
+	color: #F70D1A;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 table.battleship_grid td input[type="checkbox"] {
@@ -36,11 +76,15 @@ table.battleship_grid td input[type="checkbox"] {
 table.battleship_grid td.active {
 	background: #6CC417;
 }
+header {
+	padding: 0 0 50px 0;
+}
 
 footer {
 	font-size: 12px;
-	padding: 100px 0 0 0;
+	padding: 80px 0 0 0;
 }
+
 
 
 

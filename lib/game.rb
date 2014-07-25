@@ -42,6 +42,4 @@ class Game
 		@players.reject{ |player| player.board.all_ships_sunk? }.first
 	end
 
-
-
 end

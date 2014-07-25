@@ -1,6 +1,6 @@
 <form name="ships_grid" action="/shot" method="post">
 
-<table class="battleship_grid">
+<table class="battleship_grid opponent_grid">
 	<!-- Letters row -->
 	<tr>
 		<th></th>
@@ -24,11 +24,11 @@
 				cell = @opponentsboard.grid[coordinate]
 				display = @opponentsboard.print_away_grid_symbol(cell.content)
 	%>
-		<td id="<%= coordinate %>">
+		<td>
 			<% if cell.shot_at? %>
 				<%= display %>
 			<% else %>
-				<input type="radio" name="shoot_at" value="<%= coordinate %>">
+				<input type="radio" name="shoot_at" required value="<%= coordinate %>">
 			<% end %>
 		</td>
 	<%
