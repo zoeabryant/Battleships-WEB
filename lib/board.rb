@@ -1,4 +1,5 @@
 require './lib/cell'
+require './files'
 
 class Board
 
@@ -51,10 +52,20 @@ class Board
 		end
 	end
 
-	def has_ships?
-		grid.reject{ |key, value| value.content.class == Water }.length != 0
+	def placed_ships
+		grid.select{ |coord, cell| cell.content.class.superclass == Ship }
+	end
 
-		# grid.values.any?(part_of_ship_here?) # ugh
+	def has_ships?
+		placed_ships.length == 20
+	end
+
+	def all_ships_sunk?
+		ships = []
+		placed_ships.each_value do |cell|
+			ships << cell.content if cell.content.floating?
+		end
+		ships.empty?
 	end
 
 	private

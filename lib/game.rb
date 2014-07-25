@@ -5,6 +5,7 @@ class Game
 
 	def initialize
 		@players = []
+		@counter = 1
 	end
 
 	def add player
@@ -22,6 +23,25 @@ class Game
 	def opponent_player(name)
 		@players.reject {|player| player.name == name}.first
 	end
+
+	def countup
+		@counter += 1
+	end
+
+	def my_turn?(player)
+		return true if player == @players.first && @counter.odd?
+		return true if player == @players.last && @counter.even?
+		false
+	end
+
+	def there_a_victor?
+		@players.any?{ |player| player.board.all_ships_sunk? }
+	end
+
+	def get_victor
+		@players.reject{ |player| player.board.all_ships_sunk? }.first
+	end
+
 
 
 end

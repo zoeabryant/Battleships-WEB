@@ -1,15 +1,18 @@
-<h2>Let's play!</h1>
+<h2><%= @message %></h2>
 
-<h3>Hit at opposition:</h3>
 <% if @opponentsboard.has_ships? %>
-<%= erb :opponent_grid %>
+	<h3>Hit at opposition:</h3>
+	<%= erb :opponent_grid %>
 <% else %>
-<h3>Waiting for opponent to place their ships...</h3>
-<script type="text/javascript">
-	setInterval(function(){
-		location.reload();
-	},3000);
-</script>
+	<h3>Waiting for opponent to place their ships...</h3>
+<% end %>
+
+<% if !@opponentsboard.has_ships? || @refresh %>
+	<script type="text/javascript">
+		setInterval(function(){
+			location.reload();
+		},3000);
+	</script>
 <% end %>
 
 <h3>Your ships:</h3>

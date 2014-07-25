@@ -31,9 +31,17 @@ $(document).ready(function() {
 		// console.log($(this).attr('name'));
 		$('.error').hide()
 
+		$(this).parent().toggleClass('active');
+
 		if (theCheckboxes.filter(":checked").length > shipLength){
 			$(this).removeAttr("checked");
+			$(this).parent().removeClass('active');
 		}
+	});
+
+	theCells = $(".battleship_grid td")
+	theCells.click(function(){
+		$(this).children('input').trigger('click');
 	});
 
 	// validation

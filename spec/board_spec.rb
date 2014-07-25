@@ -1,19 +1,17 @@
 require './lib/board'
 
 describe Board do
+	let(:board){ Board.new }
 	context 'at initialization' do
 		it 'uses a hash for the grid' do
-			board = Board.new
 			expect(board.grid.class).to eq Hash
 		end
 
 		it 'has 100 key-value pairs' do
-			board = Board.new
 			expect(board.grid.length).to eq 100
 		end
 
 		it 'has some content in each cell' do
-			board = Board.new
 			board.grid.values.each do |cell|
 				expect(cell.content).to be_an_instance_of Water
 			end
@@ -54,6 +52,34 @@ describe Board do
                         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
                       ]
 		end
+	end
+
+	context '.has_ships fuckstuff and fucknuggets' do
+		before do
+			board.place(PatrolBoat.new, Coordinates.new(['A1', 'A2']))
+			board.place(Submarine.new, Coordinates.new(['B1', 'B2', 'B3']))
+			board.place(Destroyer.new, Coordinates.new(['C1', 'C2', 'C3', 'C4']))
+			board.place(Battleship.new, Coordinates.new(['D1', 'D2', 'D3', 'D4', 'D5']))
+			board.place(Carrier.new, Coordinates.new(['E1', 'E2', 'E3', 'E4', 'E5', 'E6']))
+		end
+		it 'provides an array of the board\'s ships' do
+			expect(board.placed_ships.values.all?{ |cell| cell.content.class.superclass == Ship }).to be true
+		end
+	end
+
+	context '.all_ships_sunk? shitbags' do
+		before do
+			board.place(PatrolBoat.new, Coordinates.new(['A1', 'A2']))
+			board.place(Submarine.new, Coordinates.new(['B1', 'B2', 'B3']))
+			board.place(Destroyer.new, Coordinates.new(['C1', 'C2', 'C3', 'C4']))
+			board.place(Battleship.new, Coordinates.new(['D1', 'D2', 'D3', 'D4', 'D5']))
+			board.place(Carrier.new, Coordinates.new(['E1', 'E2', 'E3', 'E4', 'E5', 'E6']))
+		end
+
+		it 'it returns false if none of the ships have been sunk' do
+			expect(board.all_ships_sunk?).to be false
+		end
+
 	end
 
 end

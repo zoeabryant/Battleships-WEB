@@ -1,6 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'sinatra'
+gem 'rack-flash'
 
 group :development, :test do
   gem 'capybara'

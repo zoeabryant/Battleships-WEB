@@ -32,4 +32,14 @@ describe Game do
 		end
 	end
 
+	context ".my_turn?" do
+		it "will allow me to play when it is my turn" do
+			game.add player1
+			game.add player2
+
+			expect(game.my_turn?(player1)).to be true
+			expect(game.my_turn?(player2)).to be false
+		end
+	end
+
 end

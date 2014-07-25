@@ -81,7 +81,16 @@ class BattleShips < Sinatra::Base
 	get '/game' do
 		@player = GAME.current_player(session[:player])
 		@board = @player.board
+		@opponentname = GAME.opponent_player(session[:player]).name
 		@opponentsboard = GAME.opponent_player(session[:player]).board
+
+		if GAME.my_turn?(@player)
+			@message = "It is your turn"
+			@refresh = false
+		else
+			@message = "Please wait for #{@opponentname} to make their move"
+			@refresh = true
+		end
 
 		erb :game
 	end
@@ -91,10 +100,44 @@ class BattleShips < Sinatra::Base
 		@board = @player.board
 		@opponentsboard = GAME.opponent_player(session[:player]).board
 
-		@player.shoot_at(@opponentsboard, params[:shoot_at])
+
+		if GAME.my_turn?(@player)
+			@message = "Shot at #{params[:shoot_at]}!!"
+			@player.shoot_at(@opponentsboard, params[:shoot_at])
+			@refresh = true
+
+			GAME.countup
+		else
+			@refresh = false
+			@message = "Not your turn!!"
+		end
 
 		erb :game
 	end
+
+	get '/shot' do
+		@player = GAME.current_player(session[:player])
+		@board = @player.board
+		@opponentname = GAME.opponent_player(session[:player]).name
+		@opponentsboard = GAME.opponent_player(session[:player]).board
+
+		if GAME.there_a_victor?
+			redirect('/end_game')
+		elsif GAME.my_turn?(@player)
+			@message = "It is your turn"
+			@refresh = false
+		else
+			@refresh = true
+			@message = "Please wait for #{@opponentname} to make their move"
+		end
+
+		erb :game
+	 end
+
+	 get '/end_game' do
+	 	@victor = GAME.get_victor.name
+		erb :end_game
+	 end
 
 	# start the server if ruby file executed directly
 	run! if app_file == $0
