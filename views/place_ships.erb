@@ -2,6 +2,6 @@
 
 <%= erb :place_ships_grid %>
 
-<% session[:player].ships.each do |ship| %>
+<% @player.ships.each do |ship| %>
 <ship class="<%= ship.class %> ship"><% ship.class %> <% ship.remaining_hits %></ship>
 <% end %>

@@ -1,4 +1,55 @@
-<form name="ships_grid" action="/place_ships/<%= session[:player].ships[1].class %>" method="post">
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var url = window.location.href
+	var currentShip = url.substring(url.lastIndexOf('/') + 1)
+
+	// consider doing this in a JSON setup
+	switch(currentShip) {
+		case 'PatrolBoat':
+			var shipLength = 2
+			break;
+		case 'Submarine':
+			var shipLength = 3
+			break;
+		case 'Destroyer':
+			var shipLength = 4
+			break;
+		case 'Battleship':
+			var shipLength = 5
+			break;
+		case 'Carrier':
+			var shipLength = 6
+			break;
+		default:
+			var shipLength = 100
+			break;
+	}
+
+	var theCheckboxes = $(".battleship_grid input[type='checkbox']");
+	theCheckboxes.click(function(e){
+		// console.log($(this).attr('name'));
+		$('.error').hide()
+
+		if (theCheckboxes.filter(":checked").length > shipLength){
+			$(this).removeAttr("checked");
+		}
+	});
+
+	// validation
+	$("form[name=ships_grid]").submit(function(){
+		if (theCheckboxes.filter(":checked").length != shipLength){
+			message = '<p class="error">A ' + currentShip + ' takes up ' + shipLength + ' coordinates!</p>'
+			$('input[type="submit"]').before(message)
+			event.preventDefault();
+		}
+	});
+
+
+});
+</script>
+
+<form name="ships_grid" action="/place_ships/<%= @player.ships[1].class %>" method="post">
 
 <table class="battleship_grid">
 	<!-- Letters row -->
@@ -23,8 +74,15 @@
 				coordinate = letter + (current_number + 1).to_s
 				cell = @board.grid[coordinate]
 
+				used = cell.content.class.superclass == Ship
 	%>
-		<td><input type="checkbox" name="<%= coordinate %>"></td>
+		<td>
+			<% if !used %>
+			<input type="checkbox" name="<%= coordinate %>">
+			<% else %>
+			♛
+			<% end %>
+		</td>
 	<%
 			end
 	%>

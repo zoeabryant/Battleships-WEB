@@ -32,12 +32,6 @@ class Board
 		when Ship
 			return '♛'
 
-		when ShotAtCell
-			return 'x'
-
-		when :miss
-			return 'o'
-
 		else
 			return ' '
 		end
